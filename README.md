@@ -11,7 +11,7 @@
     - Verifica se o email é único
     - Verifica se o username é único
 
-# AuthenticateUserService
+# AuthenticateUserService ok
 > Cria sessão do usuario, com email e senha
 
 # DeleteUserService ok

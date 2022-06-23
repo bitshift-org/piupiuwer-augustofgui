@@ -9,11 +9,14 @@ class User {
 
     password: string;
 
-    constructor({ username, email, password }: Omit<User, "id">) {
+    follows: string[];
+
+    constructor({ username, email, password }: Omit<User, "id"| "follows">) {
         this.id = uuidv4();
         this.username = username;
         this.email = email;
         this.password = password;
+        this.follows = [];
     }
 }
 
