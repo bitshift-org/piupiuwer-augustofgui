@@ -1,9 +1,12 @@
+import AppError from '../../../shared/errors/AppError';
+import MockHashProvider from '../providers/HashProvider/mocks/MockHashProvider';
 import MockUsersRepository from '../repositories/MockUsersRepository';
 import CreateUserService from './CreateUserService';
 
 const makeSut = (): CreateUserService => {
     const mockUsersRepository = new MockUsersRepository();
-    const sut = new CreateUserService(mockUsersRepository);
+    const hashProvider = new MockHashProvider();
+    const sut = new CreateUserService(mockUsersRepository, hashProvider);
 
     return sut;
 }
@@ -36,7 +39,7 @@ describe('CreateUserService', () => {
                 email: 'john@doe.com',
                 password: '123456',
             })
-        ).rejects.toBeInstanceOf(Error);
+        ).rejects.toBeInstanceOf(AppError);
     });
 
     it("should not be able to create two users with the same username", async () => {
@@ -54,6 +57,6 @@ describe('CreateUserService', () => {
                 email: 'john@dois.com',
                 password: '123456',
             })
-        ).rejects.toBeInstanceOf(Error);
+        ).rejects.toBeInstanceOf(AppError);
     });
 });

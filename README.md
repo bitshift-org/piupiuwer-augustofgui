@@ -6,7 +6,7 @@
 
 ## Users
 
-# CreateUserService
+# CreateUserService ok
 > Cria um novo usuário com um username, email, password
     - Verifica se o email é único
     - Verifica se o username é único
@@ -14,7 +14,7 @@
 # AuthenticateUserService
 > Cria sessão do usuario, com email e senha
 
-# DeleteUserService
+# DeleteUserService ok
 > Deleta um usuario logado
 
 # authenticated

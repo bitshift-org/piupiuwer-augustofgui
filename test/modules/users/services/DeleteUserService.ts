@@ -1,3 +1,4 @@
+import AppError from "../../../shared/errors/AppError";
 import User from "../entities/User";
 import IUsersRepository from "../repositories/IUserRepository";
 
@@ -8,7 +9,7 @@ class DeleteUserService {
         const userFound = await this.usersRepository.findUserById(id);
 
         if (!userFound) {
-            throw new Error("User with this id not found.");
+            throw new AppError("User with this id not found.");
         }
 
         const user = await this.usersRepository.delete(userFound);

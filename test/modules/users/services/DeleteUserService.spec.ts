@@ -1,3 +1,5 @@
+import AppError from "../../../shared/errors/AppError";
+import MockHashProvider from "../providers/HashProvider/mocks/MockHashProvider";
 import MockUsersRepository from "../repositories/MockUsersRepository";
 import CreateUserService from "./CreateUserService";
 import DeleteUserService from "./DeleteUserService";
@@ -12,7 +14,8 @@ const makeSut = () : { sut: DeleteUserService, mockUsersRepository: MockUsersRep
 describe('DeleteUserService', () => {
     it('should successfully delete a new user', async () => {
         const { sut, mockUsersRepository } = makeSut();
-        const createUserService = new CreateUserService(mockUsersRepository);
+        const hashProvider = new MockHashProvider();
+        const createUserService = new CreateUserService(mockUsersRepository, hashProvider);
 
         const user = await createUserService.execute({
             username: 'John Doe',
@@ -30,6 +33,6 @@ describe('DeleteUserService', () => {
 
         expect(
             sut.execute('invalidy_id')
-        ).rejects.toBeInstanceOf(Error);
+        ).rejects.toBeInstanceOf(AppError);
     });
 });
