@@ -2,10 +2,16 @@ import MockUsersRepository from "../repositories/MockUsersRepository";
 import CreateUserService from "./CreateUserService";
 import DeleteUserService from "./DeleteUserService";
 
+const makeSut = () : { sut: DeleteUserService, mockUsersRepository: MockUsersRepository } => {
+    const mockUsersRepository = new MockUsersRepository();
+    const sut = new DeleteUserService(mockUsersRepository);
+
+    return { sut, mockUsersRepository };
+}
+
 describe('DeleteUserService', () => {
     it('should successfully delete a new user', async () => {
-        const mockUsersRepository = new MockUsersRepository();
-        const sut = new DeleteUserService(mockUsersRepository);
+        const { sut, mockUsersRepository } = makeSut();
         const createUserService = new CreateUserService(mockUsersRepository);
 
         const user = await createUserService.execute({
@@ -20,9 +26,8 @@ describe('DeleteUserService', () => {
     });
 
     it('should not delete a new user with a invalid id', async () => {
-        const mockUsersRepository = new MockUsersRepository();
-        const sut = new DeleteUserService(mockUsersRepository);
-        
+        const { sut, mockUsersRepository } = makeSut();
+
         expect(
             sut.execute('invalidy_id')
         ).rejects.toBeInstanceOf(Error);

@@ -1,10 +1,16 @@
 import MockUsersRepository from '../repositories/MockUsersRepository';
 import CreateUserService from './CreateUserService';
 
+const makeSut = (): CreateUserService => {
+    const mockUsersRepository = new MockUsersRepository();
+    const sut = new CreateUserService(mockUsersRepository);
+
+    return sut;
+}
+
 describe('CreateUserService', () => {
     it('should successfully create a new user', async () => {
-        const mockUsersRepository = new MockUsersRepository();
-        const sut = new CreateUserService(mockUsersRepository);
+        const sut = makeSut();
 
         const user = await sut.execute({
             username: 'John Doe',
@@ -16,8 +22,7 @@ describe('CreateUserService', () => {
     });
 
     it("should not be able to create two users with the same email", async () => {
-        const mockUsersRepository = new MockUsersRepository();
-        const sut = new CreateUserService(mockUsersRepository);
+        const sut = makeSut();
 
         await sut.execute({
             username: 'John Doe',
@@ -35,8 +40,7 @@ describe('CreateUserService', () => {
     });
 
     it("should not be able to create two users with the same username", async () => {
-        const mockUsersRepository = new MockUsersRepository();
-        const sut = new CreateUserService(mockUsersRepository);
+        const sut = makeSut();
 
         await sut.execute({
             username: 'John Doe',
