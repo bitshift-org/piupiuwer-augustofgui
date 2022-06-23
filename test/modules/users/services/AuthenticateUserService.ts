@@ -39,13 +39,6 @@ class AuthenticateUserService {
 
     const token = await this.tokenProvider.generateToken(user.id);
 
-    // const { secret, expiresIn } = authConfig.jwt;
-
-    // const token = sign({}, secret, {
-    //   subject: user.id,
-    //   expiresIn,
-    // });
-
     return {
       user,
       token,

@@ -6,6 +6,6 @@ export default class MockHashProvider implements IHashProvider {
   }
 
   public async compareHash(payload: string, hashed: string): Promise<boolean> {
-    return (payload === hashed);
+    return payload === hashed;
   }
 }
