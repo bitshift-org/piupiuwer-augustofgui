@@ -21,7 +21,18 @@ class MockUsersRepository implements IUsersRepository {
     this.users.forEach((item, index) => {
       if (item === user) {
         this.users.splice(index, 1);
-        return user;
+        return item;
+      }
+    });
+
+    return user;
+  }
+
+  public async followUser(user: User, followedUserId: string): Promise<User> {
+    this.users.forEach((item) => {
+      if (item === user) {
+        item.follows.push(followedUserId);
+        return item;
       }
     });
 

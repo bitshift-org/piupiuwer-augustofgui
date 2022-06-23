@@ -17,10 +17,10 @@ const makeSut = (): {
 describe("DeleteUserService", () => {
   it("should successfully delete a new user", async () => {
     const { sut, mockUsersRepository } = makeSut();
-    const hashProvider = new MockHashProvider();
+    const mockHashProvider = new MockHashProvider();
     const createUserService = new CreateUserService(
       mockUsersRepository,
-      hashProvider
+      mockHashProvider
     );
 
     const user = await createUserService.execute({

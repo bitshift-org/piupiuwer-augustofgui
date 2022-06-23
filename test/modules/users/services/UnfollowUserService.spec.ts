@@ -22,8 +22,8 @@ const makeSut = (): {
   return { sut, createUser };
 };
 
-describe("FollowUserService", () => {
-  it("should successfully add follow to user's follows array", async () => {
+describe("UnfollowUserService", () => {
+  it("should successfully remove follow from user's follows array", async () => {
     const { sut, createUser } = makeSut();
 
     const user = await createUser.execute({
@@ -44,33 +44,5 @@ describe("FollowUserService", () => {
     });
 
     expect(user.follows);
-  });
-
-  it("should not be able to add follow to user's follows array", async () => {
-    const { sut, createUser } = makeSut();
-
-    expect(
-      sut.execute({
-        userId: "wrong_id",
-        followedUserId: "any",
-      })
-    ).rejects.toBeInstanceOf(AppError);
-  });
-
-  it("should not be able to add invalidy follow to user's follows array", async () => {
-    const { sut, createUser } = makeSut();
-
-    const user = await createUser.execute({
-      username: "John Doe",
-      email: "john@doe.com",
-      password: "123456",
-    });
-
-    expect(
-      sut.execute({
-        userId: user.id,
-        followedUserId: "wrong_id",
-      })
-    ).rejects.toBeInstanceOf(AppError);
   });
 });

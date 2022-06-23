@@ -7,14 +7,14 @@ interface Request {
   followedUserId: string;
 }
 
-class FollowUserService {
+class UnfollowUserService {
   constructor(private readonly usersRepository: IUsersRepository) {}
 
   async execute({ userId, followedUserId }: Request): Promise<User> {
     const userFound = await this.usersRepository.findUserById(userId);
 
     if (!userFound) {
-      throw new AppError("User with this id was not found.");
+      throw new AppError("An user with this id was not found.");
     }
 
     const followedUser = await this.usersRepository.findUserById(
@@ -22,7 +22,7 @@ class FollowUserService {
     );
 
     if (!followedUser) {
-      throw new AppError("Can't follow a user that does not exists.");
+      throw new AppError("Can't unfollow a user that does not exists.");
     }
 
     const user = await this.usersRepository.followUser(
@@ -34,4 +34,4 @@ class FollowUserService {
   }
 }
 
-export default FollowUserService;
+export default UnfollowUserService;

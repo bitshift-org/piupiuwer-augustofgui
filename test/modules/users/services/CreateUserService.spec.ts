@@ -5,8 +5,8 @@ import CreateUserService from "./CreateUserService";
 
 const makeSut = (): CreateUserService => {
   const mockUsersRepository = new MockUsersRepository();
-  const hashProvider = new MockHashProvider();
-  const sut = new CreateUserService(mockUsersRepository, hashProvider);
+  const mockhashProvider = new MockHashProvider();
+  const sut = new CreateUserService(mockUsersRepository, mockhashProvider);
 
   return sut;
 };
