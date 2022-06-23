@@ -18,7 +18,6 @@
 > Deleta um usuario logado
 
 # authenticated
-
 # FollowUserService
 > Seguir um usuario
 
