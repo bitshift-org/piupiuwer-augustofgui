@@ -16,6 +16,6 @@
     "typescript": "^4.7.4"
   },
   "scripts": {
-    "test": "jest --watchAll --passWithNoTests --no-cache --runInBand"
+    "test": "jest --watchAll --passWithNoTests --no-cache --runInBand --verbose"
   }
 }
