@@ -54,7 +54,7 @@ describe("UnfollowUserService", () => {
   });
 
   it("should not be able to unfollow if the user don't exists", async () => {
-    const { sut, createUser } = makeSut();
+    const { sut } = makeSut();
 
     expect(
       sut.execute({
@@ -82,7 +82,7 @@ describe("UnfollowUserService", () => {
   });
 
   it("should not be able to unfollow an user that it don't alredy follows", async () => {
-    const { sut, createUser, followUser } = makeSut();
+    const { sut, createUser } = makeSut();
 
     const user = await createUser.execute({
       username: "John Doe",
