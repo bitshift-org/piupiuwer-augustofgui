@@ -6,7 +6,11 @@ interface IUsersRepository {
 
   delete(user: User): Promise<User>;
 
-  followUser(user: User, followedUserId: string): Promise<User>;
+  addFollow(userId: string, followedUserId: string): Promise<User>;
+
+  removeFollow(userId: string, followedUserId: string): Promise<User>;
+
+  findFollowedUser(userId: string, followedUserId: string): Promise<string | null>;
 
   findUserById(id: string): Promise<User | null>;
 

@@ -28,15 +28,45 @@ class MockUsersRepository implements IUsersRepository {
     return user;
   }
 
-  public async followUser(user: User, followedUserId: string): Promise<User> {
-    this.users.forEach((item) => {
-      if (item === user) {
-        item.follows.push(followedUserId);
-        return item;
+  public async addFollow(userId: string, followedUserId: string): Promise<User> {
+    const user = this.users.find((user) => user.id === userId);
+    
+    if(!user) {
+      return this.users[0];
+    }
+
+    user.follows.push(followedUserId);
+
+    return user;
+  }
+
+  public async removeFollow(userId: string, followedUserId: string): Promise<User> {
+    const user = this.users.find((user) => user.id === userId);
+    
+    if(!user) {
+      return this.users[0];
+    }
+
+    user.follows.forEach((id, index) => {
+      if (id === followedUserId) {
+        user.follows.splice(index, 1);
+        return user;
       }
     });
 
     return user;
+  }
+
+  public async findFollowedUser(userId: string, followedUserId: string): Promise<string | null> {
+    const user = this.users.find((user) => user.id === userId);
+    
+    if(!user) {
+      return null;
+    }
+
+    const foundFollow = user.follows.find((followId) => followId == followedUserId);
+
+    return foundFollow || null;
   }
 
   public async findUserById(id: string): Promise<User | null> {

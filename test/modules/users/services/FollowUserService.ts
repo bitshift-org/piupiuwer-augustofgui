@@ -14,7 +14,7 @@ class FollowUserService {
     const userFound = await this.usersRepository.findUserById(userId);
 
     if (!userFound) {
-      throw new AppError("User with this id was not found.");
+      throw new AppError("An user with this id was not found.");
     }
 
     const followedUser = await this.usersRepository.findUserById(
@@ -25,8 +25,17 @@ class FollowUserService {
       throw new AppError("Can't follow a user that does not exists.");
     }
 
-    const user = await this.usersRepository.followUser(
-      userFound,
+    const verifyFollow = await this.usersRepository.findFollowedUser(
+      userFound.id,
+      followedUserId
+    );
+
+    if (verifyFollow) {
+      throw new AppError("Can't follow a user that the user alredy follows.");
+    }
+
+    const user = await this.usersRepository.addFollow(
+      userFound.id,
       followedUserId
     );
 

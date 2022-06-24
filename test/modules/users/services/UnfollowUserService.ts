@@ -22,11 +22,20 @@ class UnfollowUserService {
     );
 
     if (!followedUser) {
-      throw new AppError("Can't unfollow a user that does not exists.");
+      throw new AppError("Can't follow a user that does not exists.");
     }
 
-    const user = await this.usersRepository.followUser(
-      userFound,
+    const verifyFollow = await this.usersRepository.findFollowedUser(
+      userFound.id,
+      followedUserId
+    );
+
+    if (!verifyFollow) {
+      throw new AppError("Can't unfollow a user that the user don't follows.");
+    }
+
+    const user = await this.usersRepository.removeFollow(
+      userFound.id,
       followedUserId
     );
 

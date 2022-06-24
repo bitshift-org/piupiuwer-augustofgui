@@ -23,7 +23,7 @@ const makeSut = (): {
 };
 
 describe("FollowUserService", () => {
-  it("should successfully add follow to user's follows array", async () => {
+  it("should successfully follow user", async () => {
     const { sut, createUser } = makeSut();
 
     const user = await createUser.execute({
@@ -46,7 +46,7 @@ describe("FollowUserService", () => {
     expect(user.follows);
   });
 
-  it("should not be able to add follow to user's follows array", async () => {
+  it("should not be able to follow if the user don't exists", async () => {
     const { sut, createUser } = makeSut();
 
     expect(
@@ -57,7 +57,7 @@ describe("FollowUserService", () => {
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it("should not be able to add invalidy follow to user's follows array", async () => {
+  it("should not be able to follow an unexisting user", async () => {
     const { sut, createUser } = makeSut();
 
     const user = await createUser.execute({
@@ -72,5 +72,28 @@ describe("FollowUserService", () => {
         followedUserId: "wrong_id",
       })
     ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it("should not be able to follow a user if it alredy follows tha user", async () => {
+    const { sut, createUser } = makeSut();
+
+    const user = await createUser.execute({
+      username: "John Doe",
+      email: "john@doe.com",
+      password: "123456",
+    });
+
+    const otherUser = await createUser.execute({
+      username: "Other John Doe",
+      email: "other_john@doe.com",
+      password: "other_123456",
+    });
+
+    const updatedUser = await sut.execute({
+      userId: user.id,
+      followedUserId: otherUser.id,
+    });
+
+    expect(user.follows);
   });
 });
