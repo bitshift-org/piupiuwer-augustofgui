@@ -18,16 +18,16 @@
 > Deleta um usuario logado
 
 # authenticated
-# FollowUserService
+# FollowUserService ok
 > Seguir um usuario
 
-# UnfollowUserService
+# UnfollowUserService ok
 > Deseguir um usuario
 
-# GetUserProfileService
+# GetUserProfileService ok
 > Mostra o perfil de um usuario
 
-# GetPiusFromFollowers
+# GetPiusFromFollowers ok
 > Mosta as postagem de quem o usuário segue
 
 ## Pius - tem que estar authenticated
