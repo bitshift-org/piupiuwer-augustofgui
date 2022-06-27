@@ -1,3 +1,4 @@
+import AppError from "../../../shared/errors/AppError";
 import MockHashProvider from "../../users/providers/HashProvider/mocks/MockHashProvider";
 import MockUsersRepository from "../../users/repositories/MockUsersRepository";
 import CreateUserService from "../../users/services/CreateUserService";
@@ -28,5 +29,12 @@ describe('DeletePiuService', () => {
     const deletedPiu = await sut.execute(piu.id);
 
     expect(await mockPiusRepository.findById(piu.id)).toEqual(null);
+  });
+
+  it("should not delete a piu with a invalid id", async () => {
+    const mockPiusRepository = new MockPiusRepository();
+    const sut = new DeletePiuService(mockPiusRepository);
+
+    expect(sut.execute("invalidy_id")).rejects.toBeInstanceOf(AppError);
   });
 });
