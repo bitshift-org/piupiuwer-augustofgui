@@ -1,6 +1,6 @@
 import ICreateUserDTO from "../dto/ICreateUserDTO";
 import User from "../entities/User";
-import IUsersRepository from "./IUserRepository";
+import IUsersRepository from "./IUsersRepository";
 
 class MockUsersRepository implements IUsersRepository {
   private users: User[] = [];

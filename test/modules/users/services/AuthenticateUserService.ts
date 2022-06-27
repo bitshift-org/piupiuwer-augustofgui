@@ -1,6 +1,6 @@
 import User from "../entities/User";
 import IHashProvider from "../providers/HashProvider/models/IHashProvider";
-import IUsersRepository from "../repositories/IUserRepository";
+import IUsersRepository from "../repositories/IUsersRepository";
 import AppError from "../../../shared/errors/AppError";
 import ITokenProvider from "../providers/TokenProvider/models/ITokenProvider";
 

@@ -1,6 +1,6 @@
 import AppError from "../../../shared/errors/AppError";
 import User from "../entities/User";
-import IUsersRepository from "../repositories/IUserRepository";
+import IUsersRepository from "../repositories/IUsersRepository";
 
 class GetUserProfileService {
   constructor(private readonly usersRepository: IUsersRepository) {}

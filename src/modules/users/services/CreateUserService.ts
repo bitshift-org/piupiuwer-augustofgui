@@ -1,6 +1,6 @@
 import ICreateUserDTO from "../dto/ICreateUserDTO";
 import User from "../entities/User";
-import IUsersRepository from "../repositories/IUserRepository";
+import IUsersRepository from "../repositories/IUsersRepository";
 
 class CreateUserService {
     constructor(private readonly usersRepository: IUsersRepository) {}
