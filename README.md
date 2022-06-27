@@ -42,10 +42,10 @@
 # DeletePiuService ok
 > Deleta um piu na plataforma
 
-# LikePiuService
+# LikePiuService ok
 > Curte um piu
 
-# UnlikePiuService
+# UnlikePiuService 
 > Descurte um piu
 
 # CommentPiuService

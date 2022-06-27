@@ -1,13 +1,20 @@
-import User from '../entities/User';
-import ICreateUserDTO from '../dto/ICreateUserDTO';
+import User from "../entities/User";
+import ICreateUserDTO from "../dtos/ICreateUserDTO";
 
 interface IUsersRepository {
   create({ username, email, password }: ICreateUserDTO): Promise<User>;
 
-  findUserByEmail(email: string): Promise<User | null>;
+  delete(user: User): Promise<User>;
 
-  findUserByUsername(username: string): Promise<User | null>;
+  save(user: User): Promise<User>;
 
+  findById(id: string): Promise<User | null>;
+
+  findByEmail(email: string): Promise<User | null>;
+
+  findByUsername(username: string): Promise<User | null>;
+
+  findFollowedUser(userId: string, followedUserId: string): Promise<string | null>;
 }
 
 export default IUsersRepository;
