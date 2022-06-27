@@ -3,12 +3,12 @@ import Piu from "../entities/Piu";
 import IPiusRepository from "../repositories/IPiuRepository";
 
 class DeletePiuService {
-  constructor( private readonly piuRepository: IPiusRepository ) {}
+  constructor(private readonly piuRepository: IPiusRepository) {}
 
   public async execute(piuId: string): Promise<Piu> {
     const piu = await this.piuRepository.findById(piuId);
 
-    if(!piu) {
+    if (!piu) {
       throw new AppError("A Piu with this id was not found.");
     }
 
