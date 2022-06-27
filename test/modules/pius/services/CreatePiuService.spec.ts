@@ -1,3 +1,4 @@
+import AppError from "../../../shared/errors/AppError";
 import MockHashProvider from "../../users/providers/HashProvider/mocks/MockHashProvider";
 import MockUsersRepository from "../../users/repositories/MockUsersRepository";
 import CreateUserService from "../../users/services/CreateUserService";
@@ -20,10 +21,21 @@ describe('CreatePiuService', () => {
 
     const piu = await sut.execute({
       author: user.id,
-      content: "Hi, my first post here!"
+      content: "Hi, my first piu here!"
     });
 
     expect(piu).toHaveProperty("id");
     expect(piu.author).toEqual(user.id);
+  });
+
+  it('should not be able to create a piu from an unexisting user', async () => {
+    const mockUsersRepository = new MockUsersRepository();
+    const mockPiusRepository = new MockPiusRepository();
+    const sut = new CreatePiuService(mockUsersRepository, mockPiusRepository);
+
+    expect(sut.execute({
+      author: "wrong_id",
+      content: "Don't think i can post this here..."
+    })).rejects.toBeInstanceOf(AppError);
   });
 });
