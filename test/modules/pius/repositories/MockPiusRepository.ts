@@ -18,6 +18,17 @@ class MockPiusRepository implements IPiuRepository {
 
     return piu;
   }
+
+  public async delete(piu: Piu): Promise<Piu> {
+    this.pius.forEach((item, index) => {
+      if (item === piu) {
+        this.pius.splice(index, 1);
+        return item;
+      }
+    });
+
+    return piu;
+  }
   
   public async save(piu: Piu): Promise<Piu> {
     const piuIndex = this.pius.findIndex(item => item.id == piu.id);

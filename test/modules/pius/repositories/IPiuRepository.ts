@@ -6,6 +6,8 @@ interface IPiusRepository {
 
   create({ author, content }: ICreatePiuDTO): Promise<Piu>;
 
+  delete(piu: Piu): Promise<Piu>;
+
   save(piu: Piu): Promise<Piu>;
 }
 

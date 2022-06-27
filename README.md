@@ -36,10 +36,10 @@
 > Posta um piu na plataforma
     - Texto deve ter ao maximo 200 caracteres !!
 
-# EditPiuService
+# EditPiuService ok
 > Edita um piu na plataforma
 
-# DeletePiuService
+# DeletePiuService ok
 > Deleta um piu na plataforma
 
 # LikePiuService
