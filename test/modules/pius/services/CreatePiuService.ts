@@ -11,7 +11,7 @@ class CreatePiuService {
   ) {}
 
   public async execute({ author, content }: ICreatePiuDTO): Promise<Piu> {
-    const user = await this.userRepository.findUserById(author);
+    const user = await this.userRepository.findById(author);
 
     if (!user) {
       throw new AppError("This is a unexisting user.");

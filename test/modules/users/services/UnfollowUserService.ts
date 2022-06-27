@@ -11,13 +11,13 @@ class UnfollowUserService {
   constructor(private readonly usersRepository: IUsersRepository) {}
 
   async execute({ userId, followedUserId }: Request): Promise<User> {
-    const userFound = await this.usersRepository.findUserById(userId);
+    const userFound = await this.usersRepository.findById(userId);
 
     if (!userFound) {
       throw new AppError("An user with this id was not found.");
     }
 
-    const followedUser = await this.usersRepository.findUserById(
+    const followedUser = await this.usersRepository.findById(
       followedUserId
     );
 
@@ -34,10 +34,13 @@ class UnfollowUserService {
       throw new AppError("Can't unfollow a user that the user don't follows.");
     }
 
-    const user = await this.usersRepository.removeFollow(
-      userFound.id,
-      followedUserId
-    );
+    userFound.follows.forEach((item, index) => {
+      if (item === followedUserId) {
+        userFound.follows.splice(index, 1);
+      }
+    });
+
+    const user = await this.usersRepository.save(userFound);
 
     return user;
   }

@@ -28,6 +28,13 @@ class MockUsersRepository implements IUsersRepository {
     return user;
   }
 
+  public async save(user: User): Promise<User> {
+    const userIndex = this.users.findIndex(item => item.id == user.id);
+    this.users[userIndex] = user;
+
+    return user;
+  }
+
   public async addFollow(userId: string, followedUserId: string): Promise<User> {
     const user = this.users.find((user) => user.id === userId);
     
@@ -69,19 +76,19 @@ class MockUsersRepository implements IUsersRepository {
     return foundFollow || null;
   }
 
-  public async findUserById(id: string): Promise<User | null> {
+  public async findById(id: string): Promise<User | null> {
     const foundUser = this.users.find((user) => user.id === id);
 
     return foundUser || null;
   }
 
-  public async findUserByEmail(email: string): Promise<User | null> {
+  public async findByEmail(email: string): Promise<User | null> {
     const foundUser = this.users.find((user) => user.email === email);
 
     return foundUser || null;
   }
 
-  public async findUserByUsername(username: string): Promise<User | null> {
+  public async findByUsername(username: string): Promise<User | null> {
     const foundUser = this.users.find((user) => user.username === username);
 
     return foundUser || null;

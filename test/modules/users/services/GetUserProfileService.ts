@@ -6,7 +6,7 @@ class GetUserProfileService {
   constructor(private readonly usersRepository: IUsersRepository) {}
 
   public async execute(userId: string): Promise<User> {
-    const user = await this.usersRepository.findUserById(userId);
+    const user = await this.usersRepository.findById(userId);
 
     if (!user) {
       throw new AppError("An user with this id was not found.");

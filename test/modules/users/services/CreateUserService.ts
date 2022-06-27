@@ -15,7 +15,7 @@ class CreateUserService {
     email,
     password,
   }: ICreateUserDTO): Promise<User> {
-    const userEmailAlredyExists = await this.usersRepository.findUserByEmail(
+    const userEmailAlredyExists = await this.usersRepository.findByEmail(
       email
     );
 
@@ -24,7 +24,7 @@ class CreateUserService {
     }
 
     const userUserNameAlredyExists =
-      await this.usersRepository.findUserByUsername(username);
+      await this.usersRepository.findByUsername(username);
 
     if (userUserNameAlredyExists) {
       throw new AppError("Username already used.");

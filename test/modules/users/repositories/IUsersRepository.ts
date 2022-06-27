@@ -6,17 +6,15 @@ interface IUsersRepository {
 
   delete(user: User): Promise<User>;
 
-  addFollow(userId: string, followedUserId: string): Promise<User>;
+  save(user: User): Promise<User>;
 
-  removeFollow(userId: string, followedUserId: string): Promise<User>;
+  findById(id: string): Promise<User | null>;
+
+  findByEmail(email: string): Promise<User | null>;
+
+  findByUsername(username: string): Promise<User | null>;
 
   findFollowedUser(userId: string, followedUserId: string): Promise<string | null>;
-
-  findUserById(id: string): Promise<User | null>;
-
-  findUserByEmail(email: string): Promise<User | null>;
-
-  findUserByUsername(username: string): Promise<User | null>;
 }
 
 export default IUsersRepository;

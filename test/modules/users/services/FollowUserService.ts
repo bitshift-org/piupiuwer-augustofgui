@@ -11,13 +11,13 @@ class FollowUserService {
   constructor(private readonly usersRepository: IUsersRepository) {}
 
   async execute({ userId, followedUserId }: Request): Promise<User> {
-    const userFound = await this.usersRepository.findUserById(userId);
+    const userFound = await this.usersRepository.findById(userId);
 
     if (!userFound) {
       throw new AppError("An user with this id was not found.");
     }
 
-    const followedUser = await this.usersRepository.findUserById(
+    const followedUser = await this.usersRepository.findById(
       followedUserId
     );
 
@@ -34,10 +34,9 @@ class FollowUserService {
       throw new AppError("Can't follow a user that the user alredy follows.");
     }
 
-    const user = await this.usersRepository.addFollow(
-      userFound.id,
-      followedUserId
-    );
+    userFound.follows.push(followedUserId);
+
+    const user = await this.usersRepository.save(userFound);
 
     return user;
   }
