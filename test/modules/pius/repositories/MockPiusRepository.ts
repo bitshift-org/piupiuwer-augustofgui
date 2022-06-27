@@ -1,4 +1,4 @@
-import ICreatePiuDTO from "../dto/ICreatePioDTO";
+import ICreatePiuDTO from "../dtos/ICreatePioDTO";
 import Piu from "../entities/Piu";
 import IPiuRepository from "./IPiuRepository";
 

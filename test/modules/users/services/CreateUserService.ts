@@ -1,5 +1,5 @@
 import AppError from "../../../shared/errors/AppError";
-import ICreateUserDTO from "../dto/ICreateUserDTO";
+import ICreateUserDTO from "../dtos/ICreateUserDTO";
 import User from "../entities/User";
 import IHashProvider from "../providers/HashProvider/models/IHashProvider";
 import IUsersRepository from "../repositories/IUsersRepository";

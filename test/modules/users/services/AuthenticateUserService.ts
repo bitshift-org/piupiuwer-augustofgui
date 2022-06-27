@@ -4,12 +4,12 @@ import IUsersRepository from "../repositories/IUsersRepository";
 import AppError from "../../../shared/errors/AppError";
 import ITokenProvider from "../providers/TokenProvider/models/ITokenProvider";
 
-interface Request {
+interface IRequest {
   email: string;
   password: string;
 }
 
-interface Response {
+interface IResponse {
   user: User;
   token: string;
 }
@@ -21,7 +21,7 @@ class AuthenticateUserService {
     private readonly tokenProvider: ITokenProvider
   ) {}
 
-  public async execute({ email, password }: Request): Promise<Response> {
+  public async execute({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {

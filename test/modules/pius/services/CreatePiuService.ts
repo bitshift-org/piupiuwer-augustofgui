@@ -1,6 +1,6 @@
 import AppError from "../../../shared/errors/AppError";
 import IUsersRepository from "../../users/repositories/IUsersRepository";
-import ICreatePiuDTO from "../dto/ICreatePioDTO";
+import ICreatePiuDTO from "../dtos/ICreatePioDTO";
 import Piu from "../entities/Piu";
 import IPiusRepository from "../repositories/IPiuRepository";
 
