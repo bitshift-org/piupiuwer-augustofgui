@@ -32,9 +32,9 @@
 
 ## Pius - tem que estar authenticated
 
-# CreatePiuService
+# CreatePiuService ok -
 > Posta um piu na plataforma
-    - Texto deve ter ao maximo 200 caracteres
+    - Texto deve ter ao maximo 200 caracteres !!
 
 # EditPiuService
 > Edita um piu na plataforma
