@@ -1,8 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
 
-type ConstructorInit = Pick<User, "username" | "email" | "password">;
-
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')

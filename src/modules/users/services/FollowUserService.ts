@@ -34,10 +34,14 @@ class FollowUserService {
       throw new AppError("Can't follow a user that the user alredy follows.");
     }
 
+    if(!userFound.follows) {
+      userFound.follows = [];
+    }
+
     userFound.follows.push(followedUser);
 
     const user = await this.usersRepository.save(userFound);
-
+    
     return user;
   }
 }

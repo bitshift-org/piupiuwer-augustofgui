@@ -41,6 +41,10 @@ class MockUsersRepository implements IUsersRepository {
     if(!user) {
       return null;
     }
+    
+    if(!user.follows){
+      return null;
+    }
 
     const followedUser = user.follows.find((user) => user.id === followedUserId);
 
