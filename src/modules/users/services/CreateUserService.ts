@@ -1,17 +1,17 @@
-import AppError from "../../../shared/errors/AppError";
+import AppError from "@shared/errors/AppError";
 import ICreateUserDTO from "../dtos/ICreateUserDTO";
 import User from "../infra/typeorm/entities/User";
 import IHashProvider from "@shared/containers/providers/HashProvider/models/IHashProvider";
 import IUsersRepository from "../repositories/IUsersRepository";
 
-import { injectable, inject } from 'tsyringe'; 
+import { injectable, inject } from "tsyringe";
 
 @injectable()
 class CreateUserService {
   constructor(
-    @inject('UsersRepository')
+    @inject("UsersRepository")
     private readonly usersRepository: IUsersRepository,
-    @inject('HashProvider')
+    @inject("HashProvider")
     private readonly hashProvider: IHashProvider
   ) {}
 
@@ -20,16 +20,15 @@ class CreateUserService {
     email,
     password,
   }: ICreateUserDTO): Promise<User> {
-    const userEmailAlredyExists = await this.usersRepository.findByEmail(
-      email
-    );
+    const userEmailAlredyExists = await this.usersRepository.findByEmail(email);
 
     if (userEmailAlredyExists) {
       throw new AppError("Email address already used.");
     }
 
-    const userUserNameAlredyExists =
-      await this.usersRepository.findByUsername(username);
+    const userUserNameAlredyExists = await this.usersRepository.findByUsername(
+      username
+    );
 
     if (userUserNameAlredyExists) {
       throw new AppError("Username already used.");
