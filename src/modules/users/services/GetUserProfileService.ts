@@ -1,5 +1,5 @@
 import AppError from "../../../shared/errors/AppError";
-import User from "../entities/User";
+import User from "../infra/typeorm/entities/User";
 import IUsersRepository from "../repositories/IUsersRepository";
 
 class GetUserProfileService {

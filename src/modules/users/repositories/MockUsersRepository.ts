@@ -1,5 +1,5 @@
 import ICreateUserDTO from "../dtos/ICreateUserDTO";
-import User from "../entities/User";
+import User from "../infra/typeorm/entities/User";
 import IUsersRepository from "./IUsersRepository";
 
 class MockUsersRepository implements IUsersRepository {
@@ -31,35 +31,6 @@ class MockUsersRepository implements IUsersRepository {
   public async save(user: User): Promise<User> {
     const userIndex = this.users.findIndex(item => item.id == user.id);
     this.users[userIndex] = user;
-
-    return user;
-  }
-
-  public async addFollow(userId: string, followedUserId: string): Promise<User> {
-    const user = this.users.find((user) => user.id === userId);
-    
-    if(!user) {
-      return this.users[0];
-    }
-
-    user.follows.push(followedUserId);
-
-    return user;
-  }
-
-  public async removeFollow(userId: string, followedUserId: string): Promise<User> {
-    const user = this.users.find((user) => user.id === userId);
-    
-    if(!user) {
-      return this.users[0];
-    }
-
-    user.follows.forEach((id, index) => {
-      if (id === followedUserId) {
-        user.follows.splice(index, 1);
-        return user;
-      }
-    });
 
     return user;
   }
