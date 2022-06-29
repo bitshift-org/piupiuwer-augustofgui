@@ -1,4 +1,6 @@
-import { getRepository, Repository } from "typeorm";
+import { Repository } from "typeorm";
+
+import PostgresDataSource from "@shared/infra/typeorm";
 
 import ICreateUserDTO from "../../../dtos/ICreateUserDTO";
 import IUsersRepository from "../../../repositories/IUsersRepository";
@@ -8,7 +10,7 @@ class ORMUsersRepository implements IUsersRepository {
   private ormRepository: Repository<User>;
 
   constructor() {
-    this.ormRepository = getRepository(User);
+    this.ormRepository = PostgresDataSource.getRepository(User);
   }
 
   public async create({
@@ -56,9 +58,7 @@ class ORMUsersRepository implements IUsersRepository {
       return null;
     }
 
-    const foundFollow = user.follows.find(
-      (user) => user.id == followedUserId
-    );
+    const foundFollow = user.follows.find((user) => user.id == followedUserId);
 
     return foundFollow || null;
   }
@@ -70,8 +70,9 @@ class ORMUsersRepository implements IUsersRepository {
   }
 
   public async findByEmail(email: string): Promise<User | null> {
-    const foundUser = await this.ormRepository.findOne({ where: { email } });
-
+    console.log(email);
+    const foundUser = await this.ormRepository.findOneBy({ email });
+    console.log(foundUser);
 
     return foundUser || null;
   }

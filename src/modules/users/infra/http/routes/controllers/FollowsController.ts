@@ -1,19 +1,19 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
-import AuthenticateUserService from "@modules/users/services/AuthenticateUserService";
+import FollowUserService from "@modules/users/services/FollowUserService";
 
-class SessionsController {
+class FollowsController {
   public async create(request: Request, response: Response): Promise<Response> {
     try {
       const { email, password } = request.body;
 
-      const authUser = container.resolve(AuthenticateUserService);
+      const followUser = container.resolve(FollowUserService);
 
-      const responseAuth = await authUser.execute({
-        email,
-        password,
-      });
+      // const user = await followUser.execute({
+      //   email,
+      //   password,
+      // });
 
       return response.json("ok");
     } catch (err: any) {
@@ -22,4 +22,4 @@ class SessionsController {
   }
 }
 
-export default SessionsController;
+export default FollowsController;

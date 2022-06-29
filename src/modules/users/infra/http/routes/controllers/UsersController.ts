@@ -25,7 +25,7 @@ class UsersController {
 
   public async delete(request: Request, response: Response): Promise<Response> {
     try {
-      const { id } = request.body;
+      const { id } = request.user;
 
       const deleteUser = container.resolve(DeleteUserService);
 

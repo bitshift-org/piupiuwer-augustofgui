@@ -16,7 +16,7 @@ class User {
   password: string;
 
   @ManyToMany(() => User)
-  @JoinTable()
+  @JoinTable() 
   follows: User[];
 
   @CreateDateColumn()
