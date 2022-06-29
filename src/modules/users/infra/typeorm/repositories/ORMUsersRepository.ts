@@ -45,7 +45,7 @@ class ORMUsersRepository implements IUsersRepository {
   public async findFollowedUser(
     userId: string,
     followedUserId: string
-  ): Promise<string | null> {
+  ): Promise<User | null> {
     const user = await this.ormRepository.findOne({
       where: {
         id: userId,
@@ -57,7 +57,7 @@ class ORMUsersRepository implements IUsersRepository {
     }
 
     const foundFollow = user.follows.find(
-      (followId) => followId == followedUserId
+      (user) => user.id == followedUserId
     );
 
     return foundFollow || null;

@@ -1,5 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+
+type ConstructorInit = Pick<User, "username" | "email" | "password">;
 
 @Entity('users')
 class User {
@@ -15,8 +17,9 @@ class User {
   @Column()
   password: string;
 
-  @Column()
-  follows: string[];
+  @ManyToMany(() => User)
+  @JoinTable()
+  follows: User[];
 
   @CreateDateColumn()
   created_at: Date;
@@ -27,12 +30,11 @@ class User {
   @DeleteDateColumn()
   deleted_at: Date;
 
-  constructor({ username, email, password }: Omit<User, "id" | "follows" | "created_at" | "updated_at" | "deleted_at">) {
+  constructor({ username, email, password }: Pick<User, "username" | "email" | "password"> = {} as Pick<User, "username" | "email" | "password">) {
     this.id = uuidv4();
     this.username = username;
     this.email = email;
     this.password = password;
-    this.follows = [];
     this.created_at = new Date();
     this.updated_at = new Date();
     this.deleted_at = new Date();

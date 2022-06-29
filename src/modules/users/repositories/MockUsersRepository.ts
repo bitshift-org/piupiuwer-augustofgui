@@ -35,16 +35,16 @@ class MockUsersRepository implements IUsersRepository {
     return user;
   }
 
-  public async findFollowedUser(userId: string, followedUserId: string): Promise<string | null> {
+  public async findFollowedUser(userId: string, followedUserId: string): Promise<User | null> {
     const user = this.users.find((user) => user.id === userId);
     
     if(!user) {
       return null;
     }
 
-    const foundFollow = user.follows.find((followId) => followId == followedUserId);
+    const followedUser = user.follows.find((user) => user.id === followedUserId);
 
-    return foundFollow || null;
+    return followedUser || null;
   }
 
   public async findById(id: string): Promise<User | null> {

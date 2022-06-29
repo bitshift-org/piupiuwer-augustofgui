@@ -1,8 +1,10 @@
+import { injectable, inject } from "tsyringe";
+
 import User from "../infra/typeorm/entities/User";
-import IHashProvider from "../providers/HashProvider/models/IHashProvider";
 import IUsersRepository from "../repositories/IUsersRepository";
-import AppError from "../../../shared/errors/AppError";
-import ITokenProvider from "../providers/TokenProvider/models/ITokenProvider";
+import IHashProvider from "@shared/container/providers/HashProvider/models/IHashProvider";
+import ITokenProvider from "@shared/container/providers/TokenProvider/models/ITokenProvider";
+import AppError from "@shared/errors/AppError";
 
 interface IRequest {
   email: string;
@@ -14,10 +16,16 @@ interface IResponse {
   token: string;
 }
 
+@injectable()
 class AuthenticateUserService {
   constructor(
+    @inject('UsersRepository')
     private readonly usersRepository: IUsersRepository,
+
+    @inject('HashProvider')
     private readonly hashProvider: IHashProvider,
+
+    @inject('TokenProvider')
     private readonly tokenProvider: ITokenProvider
   ) {}
 

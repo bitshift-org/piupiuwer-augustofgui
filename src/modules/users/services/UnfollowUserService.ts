@@ -35,7 +35,7 @@ class UnfollowUserService {
     }
 
     userFound.follows.forEach((item, index) => {
-      if (item === followedUserId) {
+      if (item.id === followedUserId) {
         userFound.follows.splice(index, 1);
       }
     });

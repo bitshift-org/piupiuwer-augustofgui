@@ -14,7 +14,7 @@ interface IUsersRepository {
 
   findByUsername(username: string): Promise<User | null>;
 
-  findFollowedUser(userId: string, followedUserId: string): Promise<string | null>;
+  findFollowedUser(userId: string, followedUserId: string): Promise<User | null>;
 }
 
 export default IUsersRepository;

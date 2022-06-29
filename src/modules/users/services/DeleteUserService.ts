@@ -1,9 +1,15 @@
+import { injectable, inject } from "tsyringe";
+
 import AppError from "../../../shared/errors/AppError";
 import User from "../infra/typeorm/entities/User";
 import IUsersRepository from "../repositories/IUsersRepository";
 
+@injectable()
 class DeleteUserService {
-  constructor(private readonly usersRepository: IUsersRepository) {}
+  constructor(
+    @inject("UsersRepository")
+    private readonly usersRepository: IUsersRepository
+  ) {}
 
   async execute(id: string): Promise<User> {
     const userFound = await this.usersRepository.findById(id);
