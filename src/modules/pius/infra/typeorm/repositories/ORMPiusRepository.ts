@@ -6,10 +6,9 @@ import { v4 as uuidv4 } from "uuid";
 import Like from "../entities/Like";
 import Piu from "../entities/Piu";
 
-
 class ORMPiusRepository implements IPiusRepository {
-  private piusRepository: Repository<Piu>
-  private likesRepository: Repository<Like>
+  private piusRepository: Repository<Piu>;
+  private likesRepository: Repository<Like>;
   constructor() {
     this.piusRepository = PostgresDataSource.getRepository(Piu);
     this.likesRepository = PostgresDataSource.getRepository(Like);
@@ -34,7 +33,7 @@ class ORMPiusRepository implements IPiusRepository {
 
     return deletedPiu;
   }
-  
+
   public async save(piu: Piu): Promise<Piu> {
     await this.piusRepository.save(piu);
 
