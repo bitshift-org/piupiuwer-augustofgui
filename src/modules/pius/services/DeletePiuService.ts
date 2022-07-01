@@ -1,5 +1,5 @@
 import AppError from "../../../shared/errors/AppError";
-import Piu from "../entities/Piu";
+import Piu from "../infra/typeorm/entities/Piu";
 import IPiusRepository from "../repositories/IPiuRepository";
 
 class DeletePiuService {

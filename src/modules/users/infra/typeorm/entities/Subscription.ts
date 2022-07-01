@@ -1,5 +1,4 @@
 import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
-import User from './User';
 
 @Entity('subscriptions')
 export class Subscription {

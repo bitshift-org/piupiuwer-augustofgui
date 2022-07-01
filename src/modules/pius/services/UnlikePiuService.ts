@@ -1,6 +1,6 @@
 import AppError from "../../../shared/errors/AppError";
 import IUsersRepository from "../../users/repositories/IUsersRepository";
-import Piu from "../entities/Piu";
+import Piu from "../infra/typeorm/entities/Piu";
 import IPiusRepository from "../repositories/IPiuRepository";
 
 interface IUserAction {

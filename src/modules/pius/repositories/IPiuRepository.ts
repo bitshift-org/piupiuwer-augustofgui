@@ -1,5 +1,5 @@
 import ICreatePiuDTO from "../dtos/ICreatePioDTO";
-import Piu from "../entities/Piu";
+import Piu from "../infra/typeorm/entities/Piu";
 
 interface IPiusRepository {
   findById(id: string): Promise<Piu | null>;

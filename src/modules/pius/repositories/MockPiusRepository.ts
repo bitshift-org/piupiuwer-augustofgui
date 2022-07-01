@@ -1,5 +1,7 @@
+import { v4 as uuidv4 } from "uuid";
+
 import ICreatePiuDTO from "../dtos/ICreatePioDTO";
-import Piu from "../entities/Piu";
+import Piu from "../infra/typeorm/entities/Piu";
 import IPiuRepository from "./IPiuRepository";
 
 class MockPiusRepository implements IPiuRepository {
@@ -12,7 +14,11 @@ class MockPiusRepository implements IPiuRepository {
   }
 
   public async create({ author, content }: ICreatePiuDTO): Promise<Piu> {
-    const piu = new Piu({ author, content });
+    const piu = new Piu();
+
+    piu.id = uuidv4();
+    piu.author_id = author;
+    piu.content = content;
 
     this.pius.push(piu);
 

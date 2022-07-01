@@ -10,12 +10,6 @@ class Piu {
 
   @Column()
   content: string;
-
-  @Column()
-  liked_by: string[];
-
-  // @Column()
-  // comments: string[];
 }
 
 export default Piu;
