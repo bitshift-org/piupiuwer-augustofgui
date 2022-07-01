@@ -1,21 +1,15 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-@Entity('pius')
-class Piu {
+@Entity('likes')
+class Like {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  author_id: string;
+  piu_id: string;
 
   @Column()
-  content: string;
-
-  @Column()
-  liked_by: string[];
-
-  // @Column()
-  // comments: string[];
+  user_id: string;
 }
 
-export default Piu;
+export default Like;
