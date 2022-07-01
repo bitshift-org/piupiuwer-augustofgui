@@ -5,7 +5,7 @@ import routes from "./routes";
 
 import "../typeorm";
 
-import "../../containers";
+import "@shared/containers";
 
 const app = express();
 

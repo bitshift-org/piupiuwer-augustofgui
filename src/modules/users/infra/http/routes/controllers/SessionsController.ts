@@ -3,6 +3,15 @@ import { container } from "tsyringe";
 
 import AuthenticateUserService from "@modules/users/services/AuthenticateUserService";
 
+interface ResponseUser {
+  id: string;
+  username: string;
+  email: string;
+  password?: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
 class SessionsController {
   public async create(request: Request, response: Response): Promise<Response> {
     try {
@@ -10,12 +19,16 @@ class SessionsController {
 
       const authUser = container.resolve(AuthenticateUserService);
 
-      const responseAuth = await authUser.execute({
+      const { user, token } = await authUser.execute({
         email,
         password,
       });
 
-      return response.json("ok");
+      const responseUser: ResponseUser = user;
+
+      delete responseUser.password
+
+      return response.json({responseUser, token});
     } catch (err: any) {
       return response.status(400).json({ error: err.message });
     }

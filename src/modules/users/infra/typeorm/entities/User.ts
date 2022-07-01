@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Subscription } from './Subscription';
 
 @Entity('users')
 class User {
@@ -9,34 +9,23 @@ class User {
   @Column()
   username: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
   password: string;
 
-  @ManyToMany(() => User)
-  @JoinTable() 
-  follows: User[];
+  // @OneToMany(type => Subscription, subscriptions => subscriptions.owner)
+  // following: Subscription[];
+
+  // @OneToMany(type => Subscription, subscriptions => subscriptions.followed)
+  // followers: Subscription[];
 
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
-
-  @DeleteDateColumn()
-  deleted_at: Date;
-
-  constructor({ username, email, password }: Pick<User, "username" | "email" | "password"> = {} as Pick<User, "username" | "email" | "password">) {
-    this.id = uuidv4();
-    this.username = username;
-    this.email = email;
-    this.password = password;
-    this.created_at = new Date();
-    this.updated_at = new Date();
-    this.deleted_at = new Date();
-  }
 }
 
 export default User;

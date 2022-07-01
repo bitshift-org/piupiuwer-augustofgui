@@ -4,18 +4,19 @@ import { container } from "tsyringe";
 import FollowUserService from "@modules/users/services/FollowUserService";
 
 class FollowsController {
-  public async create(request: Request, response: Response): Promise<Response> {
+  public async handle(request: Request, response: Response): Promise<Response> {
     try {
-      const { email, password } = request.body;
-
+      const { id } = request.user; 
+      const { followId } = request.params;
+      
       const followUser = container.resolve(FollowUserService);
 
-      // const user = await followUser.execute({
-      //   email,
-      //   password,
-      // });
+      const { status, subscription } = await followUser.execute({
+        ownerId: id,
+        followedId: followId
+      });
 
-      return response.json("ok");
+      return response.json({ status, subscription });
     } catch (err: any) {
       return response.status(400).json({ error: err.message });
     }

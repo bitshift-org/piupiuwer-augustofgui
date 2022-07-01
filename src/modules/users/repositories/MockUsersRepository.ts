@@ -1,17 +1,28 @@
+import { v4 as uuidv4 } from "uuid";
+
 import ICreateUserDTO from "../dtos/ICreateUserDTO";
+import { Subscription } from "../infra/typeorm/entities/Subscription";
 import User from "../infra/typeorm/entities/User";
 import IUsersRepository from "./IUsersRepository";
 
 class MockUsersRepository implements IUsersRepository {
   private users: User[] = [];
+  private subscriptions: Subscription[] = [];
 
   public async create({
     username,
     email,
     password,
   }: ICreateUserDTO): Promise<User> {
-    const user = new User({ username, email, password });
+    const user = new User();
 
+    user.id = uuidv4();
+    user.username = username;
+    user.email = email;
+    user.password = password;
+    user.created_at = new Date();
+    user.updated_at = new Date();
+    
     this.users.push(user);
 
     return user;
@@ -35,20 +46,39 @@ class MockUsersRepository implements IUsersRepository {
     return user;
   }
 
-  public async findFollowedUser(userId: string, followedUserId: string): Promise<User | null> {
-    const user = this.users.find((user) => user.id === userId);
+  public async follow(ownerId: string, followedId: string): Promise<Subscription> {
+    const subscription = new Subscription();
+
+    subscription.id = uuidv4();
+    subscription.owner_id = ownerId;
+    subscription.followed_id = followedId;
+    subscription.createdAt = new Date();
+    
+    this.subscriptions.push(subscription);
+
+    return subscription;
+  }
+
+  public async unfollow(subscription: Subscription): Promise<Subscription> {
+    this.subscriptions.forEach((item, index) => {
+      if (item === subscription) {
+        this.subscriptions.splice(index, 1);
+        return item;
+      }
+    });
+    return subscription;
+  }
+
+  public async findSubscription(ownerId: string, followedId: string): Promise<Subscription | null> {
+    const user = this.users.find((user) => user.id === ownerId);
     
     if(!user) {
       return null;
     }
+
+    const subscription = this.subscriptions.find((subscription) => (subscription.owner_id === ownerId, subscription.followed_id === followedId));
     
-    if(!user.follows){
-      return null;
-    }
-
-    const followedUser = user.follows.find((user) => user.id === followedUserId);
-
-    return followedUser || null;
+    return subscription || null;
   }
 
   public async findById(id: string): Promise<User | null> {

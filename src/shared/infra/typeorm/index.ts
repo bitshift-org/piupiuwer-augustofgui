@@ -1,4 +1,3 @@
-import User from "@modules/users/infra/typeorm/entities/User";
 import { DataSource } from "typeorm";
 
 const PostgresDataSource = new DataSource({
@@ -8,12 +7,8 @@ const PostgresDataSource = new DataSource({
   username: "postgres",
   password: "docker",
   database: "piupiu_postgres",
-  entities: [
-    User
-  ],
-  migrations: [
-    "./src/shared/infra/typeorm/migrations/*.ts"
-  ],
+  entities: ["./src/modules/**/infra/typeorm/entities/*.ts"],
+  migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
 });
 
 PostgresDataSource.initialize()
@@ -24,4 +19,4 @@ PostgresDataSource.initialize()
     console.error("Error during Data Source initialization", err);
   });
 
-  export default PostgresDataSource;
+export default PostgresDataSource;

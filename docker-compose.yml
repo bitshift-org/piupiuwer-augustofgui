@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+
+  database:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 'docker'
+      POSTGRES_USERNAME: 'postgres'
+      POSTGRES_DB: 'piupiu_postgres'
+    ports:
+      - '5432:5432'

@@ -1,48 +1,56 @@
+import { injectable, inject } from "tsyringe";
+
 import AppError from "@shared/errors/AppError";
-import User from "../infra/typeorm/entities/User";
+import Subscription from "../infra/typeorm/entities/Subscription";
 import IUsersRepository from "../repositories/IUsersRepository";
 
 interface Request {
-  userId: string;
-  followedUserId: string;
+  ownerId: string;
+  followedId: string;
 }
 
-class FollowUserService {
-  constructor(private readonly usersRepository: IUsersRepository) {}
+interface Response {
+  subscription: Subscription;
+  status: string;
+}
 
-  async execute({ userId, followedUserId }: Request): Promise<User> {
-    const userFound = await this.usersRepository.findById(userId);
+@injectable()
+class FollowUserService {
+  constructor(
+    @inject("UsersRepository")
+    private readonly usersRepository: IUsersRepository
+  ) {}
+
+  async execute({ ownerId, followedId }: Request): Promise<Response> {
+    const userFound = await this.usersRepository.findById(ownerId);
 
     if (!userFound) {
       throw new AppError("An user with this id was not found.");
     }
 
-    const followedUser = await this.usersRepository.findById(
-      followedUserId
-    );
+    const followedUser = await this.usersRepository.findById(followedId);
 
     if (!followedUser) {
       throw new AppError("Can't follow a user that does not exists.");
     }
 
-    const verifyFollow = await this.usersRepository.findFollowedUser(
+    const existingSubscription = await this.usersRepository.findSubscription(
       userFound.id,
-      followedUserId
+      followedId
     );
 
-    if (verifyFollow) {
-      throw new AppError("Can't follow a user that the user alredy follows.");
+    if (existingSubscription) {
+      const subscription = await this.usersRepository.unfollow(
+        existingSubscription
+      );
+      return { subscription: existingSubscription, status: "unfollow" };
     }
 
-    if(!userFound.follows) {
-      userFound.follows = [];
-    }
-
-    userFound.follows.push(followedUser);
-
-    const user = await this.usersRepository.save(userFound);
-    
-    return user;
+    const subscription = await this.usersRepository.follow(
+      userFound.id,
+      followedId
+    );
+    return { subscription, status: "follow" };
   }
 }
 
