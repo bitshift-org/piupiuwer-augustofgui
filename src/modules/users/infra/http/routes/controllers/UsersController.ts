@@ -6,21 +6,17 @@ import DeleteUserService from "@modules/users/services/DeleteUserService";
 
 class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
-    try {
-      const { username, email, password } = request.body;
+    const { username, email, password } = request.body;
 
-      const createUser = container.resolve(CreateUserService);
+    const createUser = container.resolve(CreateUserService);
 
-      const user = await createUser.execute({
-        username,
-        email,
-        password,
-      });
+    const user = await createUser.execute({
+      username,
+      email,
+      password,
+    });
 
-      return response.json(user);
-    } catch (err: any) {
-      return response.status(400).json({ error: err.message });
-    }
+    return response.json(user);
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
@@ -36,7 +32,6 @@ class UsersController {
       return response.status(400).json({ error: err.message });
     }
   }
-  
 }
 
 export default UsersController;
