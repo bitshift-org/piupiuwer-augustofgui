@@ -37,7 +37,7 @@ describe("CreatePiuService", () => {
     });
 
     expect(piu).toHaveProperty("id");
-    expect(piu.author).toEqual(user.id);
+    expect(piu.author_id).toEqual(user.id);
   });
 
   it("should not be able to create a piu from an unexisting user", async () => {

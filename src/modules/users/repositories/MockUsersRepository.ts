@@ -52,7 +52,7 @@ class MockUsersRepository implements IUsersRepository {
     subscription.id = uuidv4();
     subscription.owner_id = ownerId;
     subscription.followed_id = followedId;
-    subscription.createdAt = new Date();
+    subscription.created_at = new Date();
     
     this.subscriptions.push(subscription);
 

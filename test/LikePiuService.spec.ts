@@ -48,12 +48,12 @@ describe("LikePiuService", () => {
       content: "This is a test.",
     });
 
-    const likedPiu = await sut.execute({
+    const { like, status} = await sut.execute({
       piuId: piu.id,
       userId: otherUser.id,
     });
 
-    expect(likedPiu.likedBy).toContain(otherUser.id);
+    expect(status).toEqual("liked");
   });
 
   it("should not be able to like a piu with a invalidy user id", async () => {

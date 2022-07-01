@@ -1,18 +1,22 @@
+import { injectable, inject } from "tsyringe";
+
 import AppError from "../../../shared/errors/AppError";
 import IPiusRepository from "../repositories/IPiuRepository";
 
 interface EditPiuDTO {
-  id: string,
-  newContent: string
+  id: string;
+  newContent: string;
 }
 
+@injectable()
 class EditPiuService {
-  constructor(private readonly piusRepository: IPiusRepository){}
-
+  constructor(
+    @inject("PiusRepository") private readonly piusRepository: IPiusRepository
+  ) {}
   public async execute({ id, newContent }: EditPiuDTO) {
     const piu = await this.piusRepository.findById(id);
 
-    if(!piu){
+    if (!piu) {
       throw new AppError("Piu with this id was not found.");
     }
 

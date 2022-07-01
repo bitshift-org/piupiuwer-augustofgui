@@ -20,6 +20,12 @@ class ORMPiusRepository implements IPiusRepository {
     return foundPiu || null;
   }
 
+  public async findLike(piuId: string, userId: string): Promise<Like | null> {
+    const foundLike = await this.likesRepository.findOneBy({ piu_id: piuId, user_id: userId });
+
+    return foundLike || null;
+  }
+
   public async create({ author, content }: ICreatePiuDTO): Promise<Piu> {
     const piu = this.piusRepository.create({ author_id: author, content });
 
@@ -38,6 +44,23 @@ class ORMPiusRepository implements IPiusRepository {
     await this.piusRepository.save(piu);
 
     return piu;
+  }
+
+  public async like(piuId: string, userId: string): Promise<Like> {
+    const like = this.likesRepository.create({
+      piu_id: piuId,
+      user_id: userId
+    });
+
+    await this.likesRepository.save(like);
+
+    return like;
+  }
+
+  public async unlike(like: Like): Promise<Like> {
+    const deletedLike = await this.likesRepository.remove(like);
+
+    return deletedLike;
   }
 }
 

@@ -1,13 +1,19 @@
+import { injectable, inject } from "tsyringe";
+
 import AppError from "../../../shared/errors/AppError";
 import IUsersRepository from "../../users/repositories/IUsersRepository";
 import ICreatePiuDTO from "../dtos/ICreatePioDTO";
 import Piu from "../infra/typeorm/entities/Piu";
 import IPiusRepository from "../repositories/IPiuRepository";
 
+@injectable()
 class CreatePiuService {
   constructor(
+    @inject('UsersRepository')
     private readonly userRepository: IUsersRepository,
-    private readonly piuRepository: IPiusRepository
+
+    @inject('PiusRepository')
+    private readonly piusRepository: IPiusRepository
   ) {}
 
   public async execute({ author, content }: ICreatePiuDTO): Promise<Piu> {
@@ -17,7 +23,7 @@ class CreatePiuService {
       throw new AppError("This is a unexisting user.");
     }
 
-    const piu = await this.piuRepository.create({
+    const piu = await this.piusRepository.create({
       author,
       content
     });

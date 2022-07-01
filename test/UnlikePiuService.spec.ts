@@ -5,13 +5,11 @@ import CreateUserService from "@modules/users/services/CreateUserService";
 import MockPiusRepository from "@modules/pius/repositories/MockPiusRepository";
 import CreatePiuService from "@modules/pius/services/CreatePiuService";
 import LikePiuService from "@modules/pius/services/LikePiuService";
-import UnlikePiuService from "@modules/pius/services/UnlikePiuService";
 
 const makeSut = (): {
   createUserService: CreateUserService;
   createPiuService: CreatePiuService;
-  likePiuService: LikePiuService;
-  sut: UnlikePiuService;
+  sut: LikePiuService;
 } => {
   const mockUsersRepository = new MockUsersRepository();
   const mockPiusRepository = new MockPiusRepository();
@@ -24,18 +22,17 @@ const makeSut = (): {
     mockUsersRepository,
     mockPiusRepository
   );
-  const likePiuService = new LikePiuService(
+  const sut = new LikePiuService(
     mockUsersRepository,
     mockPiusRepository
   );
-  const sut = new UnlikePiuService(mockUsersRepository, mockPiusRepository);
 
-  return { createUserService, createPiuService, likePiuService, sut };
+  return { createUserService, createPiuService, sut };
 };
 
 describe("UnlikePiuService", () => {
   it("should successfully unlike a piu", async () => {
-    const { createUserService, createPiuService, likePiuService, sut } =
+    const { createUserService, createPiuService, sut } =
       makeSut();
 
     const user = await createUserService.execute({
@@ -55,17 +52,17 @@ describe("UnlikePiuService", () => {
       content: "This is a test.",
     });
 
-    const likedPiu = await likePiuService.execute({
+    const likedPiu = await sut.execute({
       piuId: piu.id,
       userId: otherUser.id,
     });
 
-    const unlikedPiu = await sut.execute({
+    const { like, status } = await sut.execute({
       piuId: piu.id,
       userId: otherUser.id,
     });
 
-    expect(unlikedPiu.likedBy).not.toContain(otherUser.id);
+    expect(status).toEqual("unliked");
   });
 
   it("should not be able to unlike a piu with a invalidy user id", async () => {
@@ -110,11 +107,12 @@ describe("UnlikePiuService", () => {
       content: "This is a test.",
     });
 
-    expect(
-      sut.execute({
-        piuId: piu.id,
-        userId: user.id,
-      })
-    ).rejects.toBeInstanceOf(AppError);
+    const { like, status } = await sut.execute({
+      piuId: piu.id,
+      userId: user.id,
+    });
+
+    expect(status).not.toEqual("unliked");
+    expect(status).toEqual("liked");
   });
 });
