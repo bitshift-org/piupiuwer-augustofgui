@@ -20,17 +20,13 @@ class UsersController {
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
-    try {
-      const { id } = request.user;
+    const { id } = request.user;
 
-      const deleteUser = container.resolve(DeleteUserService);
+    const deleteUser = container.resolve(DeleteUserService);
 
-      const user = await deleteUser.execute(id);
+    const user = await deleteUser.execute(id);
 
-      return response.json(user);
-    } catch (err: any) {
-      return response.status(400).json({ error: err.message });
-    }
+    return response.json(user);
   }
 }
 

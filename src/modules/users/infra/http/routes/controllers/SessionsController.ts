@@ -14,24 +14,20 @@ interface ResponseUser {
 
 class SessionsController {
   public async create(request: Request, response: Response): Promise<Response> {
-    try {
-      const { email, password } = request.body;
+    const { email, password } = request.body;
 
-      const authUser = container.resolve(AuthenticateUserService);
+    const authUser = container.resolve(AuthenticateUserService);
 
-      const { user, token } = await authUser.execute({
-        email,
-        password,
-      });
+    const { user, token } = await authUser.execute({
+      email,
+      password,
+    });
 
-      const responseUser: ResponseUser = user;
+    const responseUser: ResponseUser = user;
 
-      delete responseUser.password
+    delete responseUser.password;
 
-      return response.json({responseUser, token});
-    } catch (err: any) {
-      return response.status(400).json({ error: err.message });
-    }
+    return response.json({ responseUser, token });
   }
 }
 

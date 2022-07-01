@@ -7,52 +7,40 @@ import EditPiuService from "@modules/pius/services/EditPiuService";
 
 class PiusController {
   public async create(request: Request, response: Response): Promise<Response> {
-    try {
-      const { id } = request.user;
-      const { content } = request.body;
+    const { id } = request.user;
+    const { content } = request.body;
 
-      const createPiu = container.resolve(CreatePiuService);
+    const createPiu = container.resolve(CreatePiuService);
 
-      const piu = await createPiu.execute({
-        author: id,
-        content,
-      });
+    const piu = await createPiu.execute({
+      author: id,
+      content,
+    });
 
-      return response.json({ piu });
-    } catch (err: any) {
-      return response.status(400).json({ error: err.message });
-    }
+    return response.json({ piu });
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
-    try {
-      const { id } = request.body;
+    const { id } = request.body;
 
-      const deletePiu = container.resolve(DeletePiuService);
+    const deletePiu = container.resolve(DeletePiuService);
 
-      const deletedPiu = await deletePiu.execute(id);
+    const deletedPiu = await deletePiu.execute(id);
 
-      return response.json(deletedPiu);
-    } catch (err: any) {
-      return response.status(400).json({ error: err.message });
-    }
+    return response.json(deletedPiu);
   }
 
   public async edit(request: Request, response: Response): Promise<Response> {
-    try {
-      const { piuId, content } = request.body;
+    const { piuId, content } = request.body;
 
-      const editPiu = container.resolve(EditPiuService);
+    const editPiu = container.resolve(EditPiuService);
 
-      const deletedPiu = await editPiu.execute({
-        id: piuId,
-        newContent: content,
-      });
+    const deletedPiu = await editPiu.execute({
+      id: piuId,
+      newContent: content,
+    });
 
-      return response.json(deletedPiu);
-    } catch (err: any) {
-      return response.status(400).json({ error: err.message });
-    }
+    return response.json(deletedPiu);
   }
 }
 
