@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
 import ICreateUserDTO from "../dtos/ICreateUserDTO";
-import { Subscription } from "../infra/typeorm/entities/Subscription";
+import Subscription from "../infra/typeorm/entities/Subscription";
 import User from "../infra/typeorm/entities/User";
 import IUsersRepository from "./IUsersRepository";
 

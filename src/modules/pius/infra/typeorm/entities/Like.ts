@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 
 @Entity('likes')
 class Like {
@@ -10,6 +10,9 @@ class Like {
 
   @Column()
   user_id: string;
+
+  @CreateDateColumn()
+  created_at: Date;
 }
 
 export default Like;

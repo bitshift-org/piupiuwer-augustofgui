@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import FollowsController from './controllers/FollowsController';
 
 import UsersController from './controllers/UsersController';
 import ensureAuthenticated from './middleware/ensureAuthenticated';

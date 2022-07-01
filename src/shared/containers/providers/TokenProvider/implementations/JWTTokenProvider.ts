@@ -1,7 +1,7 @@
 import ITokenProvider from "../models/ITokenProvider";
 
 import { sign } from "jsonwebtoken";
-import authConfig from "../../../../../config/auth";
+import authConfig from "@config/auth";
 
 export default class JWTTokenProvider implements ITokenProvider {
   public async generateToken(payload: string): Promise<string> {

@@ -2,7 +2,6 @@ import ICreatePiuDTO from "@modules/pius/dtos/ICreatePioDTO";
 import IPiusRepository from "@modules/pius/repositories/IPiuRepository";
 import PostgresDataSource from "@shared/infra/typeorm";
 import { Repository } from "typeorm";
-import { v4 as uuidv4 } from "uuid";
 import Like from "../entities/Like";
 import Piu from "../entities/Piu";
 
