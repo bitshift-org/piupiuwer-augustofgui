@@ -12,18 +12,38 @@ class ORMCommentsRepository implements ICommentsRepository {
     this.commentsRepository = PostgresDataSource.getRepository(Comment);
   }
 
-  public async create({ owner_id, author, content }: ICreateCommentDTO): Promise<Comment> {
-    const comment = this.commentsRepository.create({ owner_id, author, content });
+  public async create({
+    owner_id,
+    author,
+    content,
+  }: ICreateCommentDTO): Promise<Comment> {
+    const comment = this.commentsRepository.create({
+      owner_id,
+      author,
+      content,
+    });
 
     await this.commentsRepository.save(comment);
 
     return comment;
   }
 
+  public async delete(comment: Comment): Promise<Comment> {
+    const deletedComment = await this.commentsRepository.remove(comment);
+
+    return deletedComment;
+  }
+
   public async save(comment: Comment): Promise<Comment> {
     await this.commentsRepository.save(comment);
 
     return comment;
+  }
+
+  public async findById(id: string): Promise<Comment | null> {
+    const foundComment = await this.commentsRepository.findOneBy({ id });
+
+    return foundComment || null;
   }
 }
 

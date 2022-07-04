@@ -25,11 +25,28 @@ class MockCommentsRepository implements ICommentsRepository {
     return comment;
   }
 
+  public async delete(comment: Comment): Promise<Comment> {
+    this.comments.forEach((item, index) => {
+      if (item === comment) {
+        this.comments.splice(index, 1);
+        return item;
+      }
+    });
+
+    return comment;
+  }
+
   public async save(comment: Comment): Promise<Comment> {
     const commentIndex = this.comments.findIndex(item => item.id == comment.id);
     this.comments[commentIndex] = comment;
 
     return comment;
+  }
+
+  public async findById(id: string): Promise<Comment | null> {
+    const foundComment = this.comments.find((comment) => id === comment.id);
+
+    return foundComment || null;
   }
 }
 

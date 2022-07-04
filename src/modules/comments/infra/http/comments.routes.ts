@@ -6,5 +6,6 @@ const commentsRouter = Router();
 const commentsController = new CommentsController();
 
 commentsRouter.post("/create", ensureAuthenticated, commentsController.create);
+commentsRouter.delete("/delete", ensureAuthenticated, commentsController.delete);
 
 export default commentsRouter;
