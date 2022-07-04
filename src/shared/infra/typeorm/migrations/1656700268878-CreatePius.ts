@@ -91,7 +91,7 @@ export class CreatePius1656700268878 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-      await queryRunner.dropForeignKey("pius", "PiuLikesTarget");
+    await queryRunner.dropForeignKey("pius", "PiuLikesTarget");
     await queryRunner.dropForeignKey("pius", "PiuLikesOwner");
     await queryRunner.dropForeignKey("pius", "PiuAuthor");
     await queryRunner.dropTable("pius");

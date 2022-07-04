@@ -1,13 +1,20 @@
+import { injectable, inject } from "tsyringe";
+
 import ICreateCommentDTO from "../dtos/ICreateCommentDTO";
 import ICommentsRepository from "../repositories/ICommentsRepository";
 
+@injectable()
 class CreateCommentService {
-  constructor( private readonly commentRepository: ICommentsRepository){}
+  constructor(
+    @inject("CommentsRepository")
+    private readonly commentRepository: ICommentsRepository
+  ) {}
 
-  public async execute({ author, content }: ICreateCommentDTO){
+  public async execute({ owner_id, author, content }: ICreateCommentDTO) {
     const comment = await this.commentRepository.create({
+      owner_id,
       author,
-      content
+      content,
     });
 
     return comment;

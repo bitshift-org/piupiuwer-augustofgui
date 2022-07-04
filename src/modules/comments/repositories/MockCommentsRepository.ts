@@ -1,15 +1,24 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import ICreateCommentDTO from "../dtos/ICreateCommentDTO";
-import Comment from "../entities/Comment";
+import Comment from "../infra/typeorm/entities/Comment";
 import ICommentsRepository from "./ICommentsRepository";
 
 class MockCommentsRepository implements ICommentsRepository {
   private comments: Comment[] = [];
 
   public async create({
+    owner_id,
     author,
     content,
   }: ICreateCommentDTO): Promise<Comment> {
-    const comment = new Comment({ author, content });
+    const comment = new Comment();
+
+    comment.id = uuidv4();
+    comment.owner_id = owner_id;
+    comment.author = author;
+    comment.content = content;
+    comment.created_at = new Date();
 
     this.comments.push(comment);
 
