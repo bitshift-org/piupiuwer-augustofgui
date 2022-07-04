@@ -75,6 +75,14 @@ class ORMUsersRepository implements IUsersRepository {
     return foundSubscription || null;
   }
 
+  public async findAllSubscriptions(id: string): Promise<Subscription[]> {
+    const foundSubscriptions = await this.subscriptionsRepository.find({ where: {
+      owner_id: id
+    }});
+
+    return foundSubscriptions;
+  }
+
   public async findById(id: string): Promise<User | null> {
     const foundUser = await this.usersRepository.findOneBy({ id: id });
 

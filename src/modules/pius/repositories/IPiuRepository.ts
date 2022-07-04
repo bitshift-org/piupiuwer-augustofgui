@@ -16,6 +16,8 @@ interface IPiusRepository {
   like(piuId: string, userId: string): Promise<Like>;
 
   unlike(like: Like): Promise<Like>;
+
+  findAllPius(id: string): Promise<Piu[]>;
 }
 
 export default IPiusRepository;

@@ -22,7 +22,7 @@ class MockUsersRepository implements IUsersRepository {
     user.password = password;
     user.created_at = new Date();
     user.updated_at = new Date();
-    
+
     this.users.push(user);
 
     return user;
@@ -40,20 +40,23 @@ class MockUsersRepository implements IUsersRepository {
   }
 
   public async save(user: User): Promise<User> {
-    const userIndex = this.users.findIndex(item => item.id == user.id);
+    const userIndex = this.users.findIndex((item) => item.id == user.id);
     this.users[userIndex] = user;
 
     return user;
   }
 
-  public async follow(ownerId: string, followedId: string): Promise<Subscription> {
+  public async follow(
+    ownerId: string,
+    followedId: string
+  ): Promise<Subscription> {
     const subscription = new Subscription();
 
     subscription.id = uuidv4();
     subscription.owner_id = ownerId;
     subscription.followed_id = followedId;
     subscription.created_at = new Date();
-    
+
     this.subscriptions.push(subscription);
 
     return subscription;
@@ -69,16 +72,42 @@ class MockUsersRepository implements IUsersRepository {
     return subscription;
   }
 
-  public async findSubscription(ownerId: string, followedId: string): Promise<Subscription | null> {
+  public async findSubscription(
+    ownerId: string,
+    followedId: string
+  ): Promise<Subscription | null> {
     const user = this.users.find((user) => user.id === ownerId);
-    
-    if(!user) {
+
+    if (!user) {
       return null;
     }
 
-    const subscription = this.subscriptions.find((subscription) => (subscription.owner_id === ownerId, subscription.followed_id === followedId));
-    
+    const subscription = this.subscriptions.find(
+      (subscription) => (
+        subscription.owner_id === ownerId,
+        subscription.followed_id === followedId
+      )
+    );
+
     return subscription || null;
+  }
+
+  public async findAllSubscriptions(id: string): Promise<Subscription[]> {
+    const user = this.users.find((user) => user.id === id);
+
+    const subscriptions: Subscription[] = [];
+
+    if (!user) {
+      return subscriptions;
+    }
+
+    this.subscriptions.forEach((item) => {
+      if (item.owner_id === id) {
+        subscriptions.push(item);
+      }
+    });
+    
+    return subscriptions;
   }
 
   public async findById(id: string): Promise<User | null> {

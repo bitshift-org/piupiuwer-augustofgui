@@ -20,6 +20,8 @@ interface IUsersRepository {
   findByUsername(username: string): Promise<User | null>;
 
   findSubscription(ownerId: string, followedId: string): Promise<Subscription | null>;
+
+  findAllSubscriptions(id: string): Promise<Subscription[]>
 }
 
 export default IUsersRepository;

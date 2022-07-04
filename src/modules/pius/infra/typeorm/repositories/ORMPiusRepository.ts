@@ -61,6 +61,14 @@ class ORMPiusRepository implements IPiusRepository {
 
     return deletedLike;
   }
+
+  public async findAllPius(id: string): Promise<Piu[]> {
+    const foundPius = await this.piusRepository.find({ where: {
+      author_id: id
+    }});
+
+    return foundPius;
+  }
 }
 
 export default ORMPiusRepository;

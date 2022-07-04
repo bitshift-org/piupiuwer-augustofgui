@@ -73,6 +73,17 @@ class MockPiusRepository implements IPiuRepository {
 
     return like;
   }
+
+  public async findAllPius(id: string): Promise<Piu[]> {
+    const pius: Piu[] = [];
+    this.pius.forEach((piu) => {
+      if(piu.author_id === id) {
+        pius.push(piu);
+      }
+    });
+
+    return pius;
+  }
 }
 
 export default MockPiusRepository;
