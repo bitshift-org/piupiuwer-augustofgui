@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for users/services/CreateUserService.ts</title>
+    <title>Code coverage report for users/services/FollowUserService.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">users/services</a> CreateUserService.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">users/services</a> FollowUserService.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">77.77% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/16</span>
+                <span class='fraction'>14/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">76.47% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/15</span>
+                <span class='fraction'>13/17</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -112,21 +112,17 @@
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -134,82 +130,110 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { injectable, inject } from "tsyringe";
 &nbsp;
 import AppError from "@shared/errors/AppError";
-import ICreateUserDTO from "../dtos/ICreateUserDTO";
-import User from "../infra/typeorm/entities/User";
-import IHashProvider from "@shared/containers/providers/HashProvider/models/IHashProvider";
+import Subscription from "../infra/typeorm/entities/Subscription";
 import IUsersRepository from "../repositories/IUsersRepository";
 &nbsp;
+interface Request {
+  ownerId: string;
+  followedId: string;
+}
+&nbsp;
+interface Response {
+  subscription: Subscription;
+  status: string;
+}
+&nbsp;
 @injectable()
-class CreateUserService {
+class FollowUserService {
   constructor(
     @inject("UsersRepository")
-    private readonly usersRepository: IUsersRepository,
-    @inject("HashProvider")
-    private readonly hashProvider: IHashProvider
+    private readonly usersRepository: IUsersRepository
   ) {}
 &nbsp;
-  public async execute({
-    username,
-    email,
-    password,
-  }: ICreateUserDTO): Promise&lt;User&gt; {
-    const userEmailAlredyExists = await this.usersRepository.findByEmail(email);
+  async execute({ ownerId, followedId }: Request): Promise&lt;Response&gt; {
+    const userFound = await this.usersRepository.findById(ownerId);
 &nbsp;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (userEmailAlredyExists) {
-<span class="cstat-no" title="statement not covered" >      throw new AppError("Email address already used.");</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!userFound) {
+<span class="cstat-no" title="statement not covered" >      throw new AppError("An user with this id was not found.");</span>
     }
 &nbsp;
-    const userUserNameAlredyExists = await this.usersRepository.findByUsername(
-      username
+    const followedUser = await this.usersRepository.findById(followedId);
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!followedUser) {
+<span class="cstat-no" title="statement not covered" >      throw new AppError("Can't follow a user that does not exists.");</span>
+    }
+&nbsp;
+    const existingSubscription = await this.usersRepository.findSubscription(
+      userFound.id,
+      followedId
     );
 &nbsp;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (userUserNameAlredyExists) {
-<span class="cstat-no" title="statement not covered" >      throw new AppError("Username already used.");</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (existingSubscription) {
+      const subscription = <span class="cstat-no" title="statement not covered" >await this.usersRepository.unfollow(</span>
+        existingSubscription
+      );
+<span class="cstat-no" title="statement not covered" >      return { subscription: existingSubscription, status: "unfollow" };</span>
     }
 &nbsp;
-    const hashedPassword = await this.hashProvider.generateHash(password);
-&nbsp;
-    const user = await this.usersRepository.create({
-      username,
-      email,
-      password: hashedPassword,
-    });
-&nbsp;
-    return user;
+    const subscription = await this.usersRepository.follow(
+      userFound.id,
+      followedId
+    );
+    return { subscription, status: "follow" };
   }
 }
 &nbsp;
-export default CreateUserService;
+export default FollowUserService;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

@@ -17,7 +17,7 @@ class EditPiuService {
     const piu = await this.piusRepository.findById(id);
 
     if (!piu) {
-      throw new AppError("Piu with this id was not found.");
+      throw new AppError("A piu with this id was not found.", 404);
     }
 
     piu.content = newContent;

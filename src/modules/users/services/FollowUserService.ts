@@ -25,13 +25,13 @@ class FollowUserService {
     const userFound = await this.usersRepository.findById(ownerId);
 
     if (!userFound) {
-      throw new AppError("An user with this id was not found.");
+      throw new AppError("An user with this id was not found.", 404);
     }
 
     const followedUser = await this.usersRepository.findById(followedId);
 
     if (!followedUser) {
-      throw new AppError("Can't follow a user that does not exists.");
+      throw new AppError("Can't follow an user that doesn't exists.", 401);
     }
 
     const existingSubscription = await this.usersRepository.findSubscription(

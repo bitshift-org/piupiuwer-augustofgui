@@ -63,4 +63,10 @@ describe("GetUserFeedService", () => {
     
     expect(feed).toContain(piu);
   });
+
+  it('should not be able to get feed from an unexisting user', async () => {
+    const { sut } = makeSut();
+
+    expect(sut.execute("wrong_id")).rejects.toBeInstanceOf(AppError);
+  });
 });

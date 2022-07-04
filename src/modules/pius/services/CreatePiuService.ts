@@ -20,7 +20,7 @@ class CreatePiuService {
     const user = await this.userRepository.findById(author);
 
     if (!user) {
-      throw new AppError("This is a unexisting user.");
+      throw new AppError("An user with this id was not found.", 404);
     }
 
     const piu = await this.piusRepository.create({

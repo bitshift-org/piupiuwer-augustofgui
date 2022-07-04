@@ -36,7 +36,7 @@ describe('GetUserProfileService', () => {
     expect(userProfile.username).toEqual(user.username);
   });
 
-  it('should not be able to get profile from unexisting user', async () => {
+  it('should not be able to get profile from an unexisting user', async () => {
     const { sut } = makeSut();
 
     expect(sut.execute("wrong_id")).rejects.toBeInstanceOf(AppError);

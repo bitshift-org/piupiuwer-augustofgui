@@ -18,7 +18,7 @@ class GetUserFeedService {
     const user = await this.usersRepository.findById(userId);
 
     if (!user) {
-      throw new AppError("An user with this id was not found.");
+      throw new AppError("An user with this id was not found.", 404);
     }
 
     const subscriptions = await this.usersRepository.findAllSubscriptions(
