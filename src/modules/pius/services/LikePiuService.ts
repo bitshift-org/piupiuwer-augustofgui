@@ -28,13 +28,14 @@ class LikePiuService {
 
   public async execute({ piuId, userId }: Request): Promise<Response> {
     const piu = await this.piusRepository.findById(piuId);
+
     if (!piu) {
       throw new AppError("A piu with this id was not found.", 404);
     }
     
     const user = await this.usersRepository.findById(userId);
     if (!user) {
-      throw new AppError("An user with this id was not found.", 404);
+      throw new AppError("An user with this id was not found.", 401);
     }
 
     const existingLike = await this.piusRepository.findLike(piuId, userId);

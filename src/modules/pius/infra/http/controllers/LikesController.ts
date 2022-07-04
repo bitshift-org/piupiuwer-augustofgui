@@ -6,7 +6,7 @@ import LikePiuService from "@modules/pius/services/LikePiuService";
 class LikesController {
   public async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.user;
-    const { piu_id } = request.body;
+    const { piu_id } = request.params;
 
     const likePiu = container.resolve(LikePiuService);
 

@@ -6,6 +6,6 @@ import LikesController from "../controllers/LikesController";
 const likesRouter = Router();
 const likesController = new LikesController();
 
-likesRouter.post("/handle", ensureAuthenticated, likesController.handle);
+likesRouter.post("/:piu_id", ensureAuthenticated, likesController.handle);
 
 export default likesRouter;

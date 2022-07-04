@@ -41,22 +41,4 @@ describe("CreateUserService", () => {
       })
     ).rejects.toBeInstanceOf(AppError);
   });
-
-  it("should not be able to create two users with the same username", async () => {
-    const sut = makeSut();
-
-    await sut.execute({
-      username: "John Doe",
-      email: "john@do.com",
-      password: "123456",
-    });
-
-    expect(
-      sut.execute({
-        username: "John Doe",
-        email: "john@dois.com",
-        password: "123456",
-      })
-    ).rejects.toBeInstanceOf(AppError);
-  });
 });
