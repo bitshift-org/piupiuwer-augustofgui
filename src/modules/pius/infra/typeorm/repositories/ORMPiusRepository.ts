@@ -66,7 +66,7 @@ class ORMPiusRepository implements IPiusRepository {
     const foundPius = await this.piusRepository.find({ where: {
       author_id: id
     }});
-
+    
     return foundPius;
   }
 }

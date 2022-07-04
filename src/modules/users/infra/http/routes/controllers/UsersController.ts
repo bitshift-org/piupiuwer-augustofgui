@@ -4,6 +4,8 @@ import { container } from "tsyringe";
 import CreateUserService from "@modules/users/services/CreateUserService";
 import DeleteUserService from "@modules/users/services/DeleteUserService";
 import GetUserProfileService from "@modules/users/services/GetUserProfileService";
+import GetUserFeedService from "@modules/users/services/GetUserFeedService";
+import IResposeUserDTO from "@modules/users/dtos/IResponseUserSTO";
 
 class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -17,6 +19,9 @@ class UsersController {
       password,
     });
 
+    const responseUser: IResposeUserDTO = user;
+    delete responseUser.password;
+
     return response.json(user);
   }
 
@@ -26,6 +31,9 @@ class UsersController {
     const deleteUser = container.resolve(DeleteUserService);
 
     const user = await deleteUser.execute(id);
+
+    const responseUser: IResposeUserDTO = user;
+    delete responseUser.password;
 
     return response.json(user);
   }
@@ -37,17 +45,20 @@ class UsersController {
 
     const user = await getUser.execute(id);
 
+    const responseUser: IResposeUserDTO = user;
+    delete responseUser.password;
+
     return response.json(user);
   }
 
   public async getFeed(request: Request, response: Response): Promise<Response> {
     const { id } = request.user;
 
-    const getUser = container.resolve(GetUserProfileService);
+    const getFeed = container.resolve(GetUserFeedService);
 
-    const user = await getUser.execute(id);
-
-    return response.json(user);
+    const feed = await getFeed.execute(id);
+    
+    return response.json(feed);
   }
 }
 

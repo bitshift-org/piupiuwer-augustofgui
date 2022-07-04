@@ -21,16 +21,16 @@ class GetUserFeedService {
       throw new AppError("An user with this id was not found.");
     }
 
-    const subscriptons = await this.usersRepository.findAllSubscriptions(
+    const subscriptions = await this.usersRepository.findAllSubscriptions(
       userId
     );
 
     const feed: Piu[] = [];
 
-    subscriptons.forEach(async (item) => {
+    await Promise.all(subscriptions.map(async (item) => {
       const pius = await this.piusRepository.findAllPius(item.followed_id);
       feed.push(...pius);
-    });
+    }));
 
     return feed;
   }
